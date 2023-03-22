@@ -1,0 +1,104 @@
+data:
+  - attributes:
+      created_at: '2022-08-06T10:14:18'
+      destination_override_endpoint: 'https://dffb-103-62-155-206.ngrok.io'
+      entries:
+        - classifiers: {}
+          config:
+            condition: AND
+            expression: null
+            rules:
+              - condition: null
+                expression:
+                  field: PathInfo
+                  operator: equals
+                  type: string
+                  values:
+                    - /api/simple-vgs/inbound
+                rules: null
+              - condition: null
+                expression:
+                  field: ContentType
+                  operator: equals
+                  type: string
+                  values:
+                    - application/json
+                rules: null
+          id: 527d0404-abf3-4068-b33e-628526cd74d8
+          id_selector: null
+          operation: REDACT
+          operations: null
+          phase: REQUEST
+          public_token_generator: UUID
+          targets:
+            - body
+          token_manager: PERSISTENT
+          transformer: JSON_PATH
+          transformer_config:
+            - $.card_number
+            - $.cvv
+          transformer_config_map: null
+      host_endpoint: (.*)\.verygoodproxy\.com
+      id: 613eb3da-11f5-4192-b84d-1d1357e921ab
+      ordinal: null
+      port: 80
+      protocol: http
+      source_endpoint: '*'
+      tags:
+        name: echo.apps.verygood.systems-olive-drab-pyramid
+        source: RouteContainer
+      updated_at: '2022-08-06T11:19:22'
+    id: 613eb3da-11f5-4192-b84d-1d1357e921ab
+    type: rule_chain
+  - attributes:
+      created_at: '2022-08-06T11:18:46'
+      destination_override_endpoint: '*'
+      entries:
+        - classifiers: {}
+          config:
+            condition: AND
+            expression: null
+            rules:
+              - condition: null
+                expression:
+                  field: PathInfo
+                  operator: matches
+                  type: string
+                  values:
+                    - /api/simple-vgs/outbound
+                rules: null
+              - condition: null
+                expression:
+                  field: ContentType
+                  operator: equals
+                  type: string
+                  values:
+                    - application/json
+                rules: null
+          id: 4ba5fb8f-eed3-4073-bd64-62f7cc3e76c6
+          id_selector: null
+          operation: ENRICH
+          operations: null
+          phase: REQUEST
+          public_token_generator: UUID
+          targets:
+            - body
+          token_manager: PERSISTENT
+          transformer: JSON_PATH
+          transformer_config:
+            - $.card_number
+            - $.cvv
+          transformer_config_map: null
+      host_endpoint: dffb-103-62-155-206.ngrok.io
+      id: e7c20f1b-0f25-4494-a93f-620fa67679e4
+      ordinal: null
+      port: 80
+      protocol: http
+      source_endpoint: '*'
+      tags:
+        name: honey-dew-cylinder
+        source: RouteContainer
+      updated_at: '2022-08-06T11:18:46'
+    id: e7c20f1b-0f25-4494-a93f-620fa67679e4
+    type: rule_chain
+version: 1

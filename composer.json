@@ -1,0 +1,48 @@
+{
+    "name": "luchavez/simple-vgs",
+    "description": "Very Good Security (VGS) Wrapper",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "James Carlo Luchavez",
+            "email": "jamescarloluchavez@gmail.com",
+            "homepage": "https://www.linkedin.com/in/jsluchavez"
+        }
+    ],
+    "homepage": "https://github.com/luchmewep/simple-vgs",
+    "keywords": ["Laravel", "SimpleVgs"],
+    "require": {
+        "php": "^8.0",
+        "illuminate/support": "~8|~9",
+        "luchavez/api-sdk-kit": "^1.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~6|~7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Luchavez\\SimpleVgs\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Luchavez\\SimpleVgs\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Luchavez\\SimpleVgs\\Providers\\SimpleVgsServiceProvider"
+            ],
+            "aliases": {
+                "SimpleVgs": "Luchavez\\SimpleVgs\\Facades\\SimpleVgs"
+            }
+        },
+        "branch-alias": {
+            "dev-master": "1.0.x-dev",
+            "dev-develop": "1.0.x-dev"
+        }
+    }
+}
