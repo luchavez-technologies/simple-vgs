@@ -1,6 +1,6 @@
 {
     "name": "luchavez/simple-vgs",
-    "description": "Very Good Security (VGS) Wrapper",
+    "description": "Very Good Security (VGS) Wrapper for Laravel 8|9|10",
     "license": "MIT",
     "authors": [
         {
