@@ -2,9 +2,9 @@
 
 namespace Luchavez\SimpleVgs\Console\Commands;
 
-use Luchavez\ApiSdkKit\Services\MakeRequest;
-use Luchavez\StarterKit\Traits\UsesCommandCustomMessagesTrait;
 use Illuminate\Console\Command;
+use Luchavez\ApiSdkKit\Services\SimpleHttp;
+use Luchavez\StarterKit\Traits\UsesCommandCustomMessagesTrait;
 
 /**
  * Class VGSInboundOutboundCommand
@@ -43,17 +43,17 @@ class VGSInboundOutboundCommand extends Command
 
         $this->ongoing('Redacting data: '.json_encode($data));
 
-        $inbound_log = tap(makeRequest(simpleVgs()->getInboundRouteURL())->returnAsResponse()->data($data))->post('api/simple-vgs/inbound');
+        $inbound_log = tap(simpleHttp(simpleVgs()->getInboundRouteURL())->returnAsResponse()->data($data))->post('api/simple-vgs/inbound');
 
-        if ($inbound_log instanceof MakeRequest && $inbound_log->getStatusFromResponse() == 200) {
+        if ($inbound_log instanceof SimpleHttp && $inbound_log->getStatusFromResponse() == 200) {
             $redacted = $inbound_log->getDataFromResponse()->get('data');
 
             $this->ongoing('Revealing redacted data: '.json_encode($redacted));
 
-            $outbound_log = tap(makeRequest(config('app.url'))->returnAsResponse()->data($redacted)->proxy(simpleVgs()->getOutboundRouteURL()))
+            $outbound_log = tap(simpleHttp(config('app.url'))->returnAsResponse()->data($redacted)->proxy(simpleVgs()->getOutboundRouteURL()))
                 ->post('api/simple-vgs/outbound');
 
-            if ($outbound_log instanceof MakeRequest &&
+            if ($outbound_log instanceof SimpleHttp &&
                 ($revealed = $outbound_log->getDataFromResponse()->get('data')) &&
                 $revealed == $data
             ) {

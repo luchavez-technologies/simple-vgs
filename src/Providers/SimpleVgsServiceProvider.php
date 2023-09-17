@@ -2,11 +2,11 @@
 
 namespace Luchavez\SimpleVgs\Providers;
 
+use Illuminate\Support\Facades\App;
 use Luchavez\SimpleVgs\Console\Commands\VGSInboundOutboundCommand;
 use Luchavez\SimpleVgs\Console\Commands\VGSPublishYamlCommand;
 use Luchavez\SimpleVgs\Services\SimpleVgs;
 use Luchavez\StarterKit\Abstracts\BaseStarterKitServiceProvider;
-use Illuminate\Support\Facades\App;
 
 /**
  * Class SimpleVgsServiceProvider
